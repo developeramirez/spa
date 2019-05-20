@@ -8,31 +8,53 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Generador</title>
   </head>
   <body>
-   	<div class="container my-5 text-center">
-   	    <button class="btn btn-danger w-100" onclick="tes()" >Generar Usuario</button>
-	   	<div class="mt-5" id="contenido">
-	   		
+    <div class="container my-5 text-center">
+        <button class="btn btn-danger w-100" onclick="tes()" >Generar Usuario</button>
+      <div class="mt-5" id="contenido">
+        
 
-	   	</div>
-   	</div>	
-   	<script type="text/javascript">
-   		var contenido= document.querySelector('#contenido')
+      </div>
+    </div>
 
-   		function tes() {
-   			fetch('https://randomuser.me/api/')
-   			.then(resp => resp.json())
-   			.then(data=> {
-   				console.log(data.results['0'])
-   				contenido.innerHTML= `<img src="${data.results['0'].picture.large}" width="100px" class="img-fluid rounded-circle">
-	   		
-	   		        <p>Nombre:${data.results['0'].name.last}</p>
-	   		        <p>Email:${data.results['0'].email}</p>`
-   			})
-   			
-   		}
-   	</script>
+
+    <footer class="card-footer text-muted">
+      <p>Para el uso de la Aplicacion de Click en el boton Generar Usuario</p>
+    </footer>
+
+
+
+    <script type="text/javascript">
+      var contenido= document.querySelector('#contenido')
+
+      function tes() {
+        fetch('https://randomuser.me/api/')
+        .then(resp => resp.json())
+        .then(data=> {
+          console.log(data.results['0'])
+          contenido.innerHTML= `<img src="${data.results['0'].picture.large}" width="100px" class="img-fluid rounded-circle"><br>
+            <table class="table">
+
+              <tr>
+                <th scope="col">Nombre: </th>
+                <th scope="col">Apellido: </th>
+                <th scope="col">Location: </th>
+                <th scope="col">Email: </th>
+                
+              </tr>
+              <tr>
+                <td>${data.results['0'].name.first} </td>
+                <td>${data.results['0'].name.last}</td>
+                <td>${data.results['0'].location.street}</td>
+                <td>${data.results['0'].email} </td>
+              </tr>
+
+            </table>`
+        })
+        
+      }
+    </script>
   </body>
 </html>
